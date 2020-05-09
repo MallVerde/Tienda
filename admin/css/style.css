@@ -1,0 +1,208 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contenedor_principal{
+    width: 100%;
+    overflow: hidden;
+}
+
+/*Aquí inician los estilos de la cabecera*/
+
+header{
+    width: 100%;
+    background: rgb(43, 41, 41);
+}
+
+header .titulo_cabecera{
+    max-width: 1400px;
+    margin: auto;
+    width: 80%;
+    margin: auto;
+    font-family: 'Manrope', sans-serif;
+    color: white;
+    padding: 20px 0px 20px 0px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/*Aqui terminan los estilos de la cabecera*/
+
+/*Aquí inician los estilso para el manú de navegación*/
+
+nav{
+    width: 100%;
+    border: 1px solid blacK;
+}
+
+nav .barra{
+    max-width: 1400px;
+    margin: auto;
+    width: 80%;
+}
+
+nav .barra div{
+    float: left;
+    width: 50%;
+}
+
+/*Estilos para la parte de los enlaces de la izquierda*/
+nav .barra .menu_left  ul {
+    list-style: none;
+}
+
+nav .barra .menu_left  ul li {
+    float: left;
+}
+
+nav .barra .menu_left  ul li a{
+    text-decoration: none;
+    padding: 12px 20px 12px 0px;
+    color: black;
+    font-family: 'Manrope', sans-serif;
+}
+/*Aquí terminan los estilos para la parte de los enlaces de la izquierda*/
+
+/*Estilos para la parte de los enlaces de la derecha*/
+
+nav ul li a{
+    font-size: 15px;    
+    text-decoration: none;
+    display: block;
+    padding: 12px 0px 12px 52px;
+    color:black;    
+    font-family: 'Manrope', sans-serif;
+}
+
+
+.navegacion ul{
+    list-style: none;
+}
+
+.navegacion ul li{
+    float: right;
+}
+
+.navegacion ul li a{
+    text-decoration: none;
+}
+
+.navegacion ul li a:hover{
+    color: #000;
+}
+.menu > li{
+	position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.menu > li > a{
+	display: block;
+	padding: 15px 0px 15px 15px;
+	color: #353535;
+	font-family: 'Manrope', sans-serif;
+    text-decoration: none;
+}
+
+.menu li a:hover{
+    transition: all .3s;
+}
+
+/* Submenu*/
+
+.submenu{
+	position: absolute;
+	background: rgb(243, 241, 241);
+	width: 100%;
+	visibility: hidden;
+	opacity: 0;
+    transition: opacity 1.5s;
+    list-style: none;
+    text-align: right;
+}
+
+
+.submenu li a{
+	display: block;
+	padding: 15px 12px 15px;
+	color: #000;
+	font-family: 'Manrope', sans-serif;
+	text-decoration: none;
+}
+
+.menu li:hover .submenu{
+	visibility: visible;
+	opacity: 1;
+}
+/*Aquí terminan los estilos para la parte de los enlaces de la derecha*/
+
+/*Aquí empiezan los estilos del cuarpo de la pagina*/
+
+section{
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid black;
+}
+
+section .cuerpo{
+   width: 80%;
+   margin: auto;
+   max-width: 1400px; 
+   padding: 0px 0px 20px 0px;
+}
+
+
+section .funciones{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 1em;
+    padding: 10px 10px 10px 0px;
+}
+/*Aquí terminan los estilos del cuerpo de la pagina*/
+
+
+/*Estilos para productos*/
+.imagen_carro{
+	width:50px;
+	height:50px;
+	border-radius: 1000px;
+}
+/*Fin de estilos para productos*/
+
+/*Aquí empiezan los estilos del pie de pagina*/
+
+footer{
+    overflow: hidden;
+    width: 100%;
+    background: rgb(43, 41, 41);
+    overflow: hidden;
+}
+
+footer .contenido_pie{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    max-width: 1400px;
+    font-family: 'Manrope', sans-serif;
+    color: rgb(240, 230, 230);
+    font-size: 12px;
+    padding: 20px 0px 20px 0px;
+}
+
+footer .contenido_pie div{
+   float: left;
+   width: 50%;
+}
+
+footer .contenido_pie div h2{
+    margin-bottom: 10px;
+}
+
+footer .contenido_pie .pie_right{
+    text-align: right;
+    border-left: 1px solid white;
+}
+
+/*Aquí terminan los estilos del pie de pagina*/

@@ -1,0 +1,365 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contenedor_principal{
+    width: 100%;
+    overflow: hidden;
+}
+
+/*Aquí inician los estilos de la cabecera*/
+
+header{
+    width: 100%;
+    background: rgb(43, 41, 41);
+}
+
+header .titulo_cabecera{
+    max-width: 1400px;
+    margin: auto;
+    width: 90%;
+    margin: auto;
+    font-family: 'Manrope', sans-serif;
+    color: white;
+    padding: 20px 0px 20px 0px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/*Aqui terminan los estilos de la cabecera*/
+
+/*Aquí inician los estilso para el manú de navegación*/
+
+nav{
+    width: 100%;
+    border: 1px solid blacK;
+}
+
+nav .barra{
+    max-width: 1400px;
+    margin: auto;
+    width: 90%;
+}
+
+nav .barra div{
+    float: left;
+    width: 50%;
+}
+
+/*Estilos para la parte de los enlaces de la izquierda*/
+nav .barra .menu_left  ul {
+    list-style: none;
+}
+
+nav .barra .menu_left  ul li {
+    float: left;
+}
+
+nav .barra .menu_left  ul li a{
+    text-decoration: none;
+    padding: 12px 40px 12px 0px;
+    color: black;
+    font-family: 'Manrope', sans-serif;
+}
+/*Aquí terminan los estilos para la parte de los enlaces de la izquierda*/
+
+/*Estilos para la parte de los enlaces de la derecha*/
+
+nav ul li a{
+    font-size: 15px;    
+    text-decoration: none;
+    display: block;
+    padding: 12px 0px 12px 52px;
+    color:black;    
+    font-family: 'Manrope', sans-serif;
+}
+
+
+.navegacion ul{
+    list-style: none;
+}
+
+.navegacion ul li{
+    float: right;
+}
+
+.navegacion ul li a{
+    text-decoration: none;
+}
+
+.navegacion ul li a:hover{
+    color: #000;
+}
+.menu > li{
+	position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.menu > li > a{
+	display: block;
+	padding: 15px 0px 15px 40px;
+	color: #353535;
+	font-family: 'Manrope', sans-serif;
+    text-decoration: none;
+}
+
+.menu li a:hover{
+    transition: all .3s;
+}
+
+/* Submenu*/
+
+.submenu{
+	position: absolute;
+	background: #f5f0f0a4;
+	width: 100%;
+	visibility: hidden;
+	opacity: 0;
+    transition: opacity 1.5s;
+    list-style: none;
+    text-align: right;
+}
+
+.submenu li a{
+	display: block;
+	padding: 15px 12px 15px;
+	color: #000;
+	font-family: 'Manrope', sans-serif;
+	text-decoration: none;
+}
+
+.menu li:hover .submenu{
+	visibility: visible;
+	opacity: 1;
+}
+/*Aquí terminan los estilos para la parte de los enlaces de la derecha*/
+
+/*Aquí empiezan los estilos del mensaje publicitario*/
+.publicitario{
+    width: 100%;
+    overflow: hidden;    
+    margin-top: -40px;
+    margin-bottom: 1em;
+}
+
+.publicitario .imagen_publicitaria{
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    background-image: url(../img/img1.jpg); 
+    padding: 70px 0px 70px 0px;
+    height: 300px;
+}
+
+.publicitario .imagen_publicitaria .texto_publicidad{
+    width: 50%;
+    margin: auto;
+    font-family: 'Manrope', sans-serif;
+    color: rgb(240, 230, 230);
+    text-transform: uppercase;
+}
+/*Aquí terminan los estilos del mensaje publicitario*/
+/*Estilos para la pestaña productos*/
+
+.buscar{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 1em;
+}
+
+.producto{
+    margin: 15px 6px 15px 6px;
+	float: left;
+    width:23.8%;
+    overflow: hidden;
+    padding:10px;
+	background: rgba(134, 128, 128, 0.137);
+	color:#333;
+
+}
+
+.contenedor_img{
+    overflow: hidden;
+}
+
+.img_producto{
+	text-align: center;
+	width:100%;
+	height:200px;
+}
+
+.name_producto{
+	padding:5px 5px 0px 5;
+	color: black;
+	text-align: center;
+	font-size:14px;
+    font-weight: bold;
+    font-family: 'Manrope', sans-serif;
+}
+
+.precio{
+	color:#00aa00;
+	padding:20px;
+}
+
+.imagen_carro{
+	width:50px;
+	height:50px;
+	border-radius: 1000px;
+}
+
+.subir{
+	position: relative;
+	bottom: 10px;
+}
+
+
+.text-green{
+	color:#0a0;
+}
+
+.carritot{
+	background:#ff8800;
+	color:white;
+	padding:10px;
+	border-radius:4px 4px 0px 0px;
+	position:fixed;
+	width:300px;
+	right:0px;
+	bottom:0px;
+	cursor:pointer;
+}
+
+.carritob{
+	background: #fff;
+	color:#333;
+	padding:10px;
+	width:300px;
+	position:fixed;
+	height:350px;
+	bottom:-350px;
+	right:0px;
+	overflow-y:scroll;
+}
+
+.cant{
+	width:50px;
+	display:inline-block;
+	padding:5px;
+}
+
+/*Aquí empiezan los estilos del cuarpo de la pagina*/
+
+section{
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid black;
+}
+
+section .cuerpo{
+   width: 90%;
+   overflow: hidden;
+   margin: auto;
+   max-width: 1400px; 
+   padding: 0px 0px 20px 0px;
+}
+
+/*Aquí terminan los estilos del cuerpo de la pagina*/
+
+/*Aquí empiezan los estilos del pie de pagina*/
+
+footer{
+    overflow: hidden;
+    width: 100%;
+    background: rgb(43, 41, 41);
+    overflow: hidden;
+}
+
+footer .contenido_pie{
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    max-width: 1400px;
+    font-family: 'Manrope', sans-serif;
+    color: rgb(240, 230, 230);
+    font-size: 12px;
+    padding: 20px 0px 20px 0px;
+}
+
+footer .contenido_pie div{
+   float: left;
+   width: 50%;
+}
+
+footer .contenido_pie div h2{
+    margin-bottom: 10px;
+}
+
+footer .contenido_pie .pie_right{
+    text-align: right;
+    border-left: 1px solid white;
+}
+
+footer .contenido_pie .pie_right img{
+    opacity:.5;
+    overflow: hidden;    
+}
+
+footer .contenido_pie .pie_right img:hover{
+    opacity:10;   
+    cursor: pointer;
+}
+
+footer hr{
+    clear: left;
+    padding: 10px;
+    border-style: none;
+    background: rgb(136, 135, 135);
+}
+/*Aquí terminan los estilos del pie de pagina*/
+
+
+/*Estilos para el inicio de sesión de la pestaña adnimistrador*/ 
+.centrar_login{
+    width: 25%;
+    margin: auto;
+    text-align: center;
+}
+
+.centrar_login div {
+    margin-top: 50px;
+}
+
+.centrar_login .form-group .btn{
+    width: 100%;
+    padding:12px;
+    color: white;
+    background: rgb(81, 116, 129);
+    border-radius: 0px;
+}
+
+/*Aqui terminan los estilos para la pestaña administrador*/
+/*Estilos para el registro de usuarios*/
+
+.centrar_registro{
+    width: 25%;
+    margin: auto;
+    text-align: center;
+}
+
+.centrar_registro div {
+    margin-top: 30px;
+}
+
+.centrar_registro .form-group .btn{
+    width: 100%;
+    padding:12px;
+    color: white;
+    background: rgb(81, 116, 129);
+    border-radius: 0px;
+}
+
+/*Aqui terminan los estilos para el registro de usuarios*/
