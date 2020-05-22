@@ -4,7 +4,6 @@
 	$email=$_POST['email'];
 	$pass=$_POST['password'];
 
-	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 	$sql2=mysqli_query($mysqli,"SELECT * FROM admins WHERE email='$email'");
 	if($f2=mysqli_fetch_assoc($sql2)){
 		if($pass==$f2['pasadmin']){

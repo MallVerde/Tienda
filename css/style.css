@@ -114,18 +114,19 @@ nav ul li a{
 
 .submenu{
 	position: absolute;
-	background: #f5f0f0a4;
+    background: #464444dc;
+
 	width: 100%;
 	visibility: hidden;
 	opacity: 0;
-    transition: opacity 1.5s;
+    transition: opacity 1s;
     list-style: none;
     text-align: right;
 }
 
 .submenu li a{
 	display: block;
-	padding: 15px 12px 15px;
+    padding: 15px 12px 15px;
 	color: #000;
 	font-family: 'Manrope', sans-serif;
 	text-decoration: none;
@@ -133,7 +134,8 @@ nav ul li a{
 
 .menu li:hover .submenu{
 	visibility: visible;
-	opacity: 1;
+    opacity: 1;
+    z-index: 2;
 }
 /*Aquí terminan los estilos para la parte de los enlaces de la derecha*/
 
@@ -363,3 +365,81 @@ footer hr{
 }
 
 /*Aqui terminan los estilos para el registro de usuarios*/
+
+
+/*Estilos para el perfil*/
+
+.perfil{
+    margin-top: 1em;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0px 20px 0px;
+}
+
+.perfil form div{
+    float: left;
+}
+
+.perfil form div img{
+    width: 150px;
+    border-radius: 100px;
+}
+
+.perfil .datos_imagen{
+    width: 30%;
+    float: left;
+}
+
+.perfil form #load_img{
+    overflow: hidden;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid;
+}
+
+.perfil form .pedido_perfil{
+    width: 100%;
+    clear: left;
+    margin-top: 3em;
+    padding: 20px;
+    border: 1px solid;
+}
+
+.perfil form .pedido_perfil ul {
+    list-style: none;
+}
+
+.perfil form .pedido_perfil ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.perfil form .datos_perfil{    
+    padding: 0px 30px 20px 30px;
+    width: 70%;
+}
+
+.perfil form .datos_perfil hr{
+    border: 0.5px solid gray ;
+}
+
+.perfil form .formulario_perfil table{
+    width: 100%;
+}
+
+.perfil form .formulario_perfil table td{
+    padding: 0px 20px 30px 0px;
+    width: 50%;
+}
+
+.perfil form .formulario_perfil table tr td input{
+    width: 300px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+
+
+/*Aquí terminan los estilos para el perfil*/

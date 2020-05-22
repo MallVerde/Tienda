@@ -9,11 +9,11 @@
                 <label><h1>Iniciar Sesión</h1></label>
                 <label><h5>¿Nuevo en este sitio? <a href="?p=registro">Registrate</a> </h5> </label>
                 <div class="form-group">
-				<input type="text" autocomplete="off" class="form-control" placeholder="Email" name="email"/>
+				<input type="email" autocomplete="off" class="form-control" placeholder="Email" name="email" maxlength="55">
 				</div>
 
 				<div class="form-group">
-				<input type="password" class="form-control" placeholder="Contraseña" name="password"/>
+				<input type="password" class="form-control" placeholder="Contraseña" name="password" maxlength="55"/>
 				</div>
 
                 <div class="form-group">

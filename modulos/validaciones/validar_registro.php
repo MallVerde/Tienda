@@ -13,7 +13,8 @@
 				echo "<script>location.href='../../?p=registro'</script>";
 			}else{
 				
-				mysqli_query($mysqli,"INSERT INTO clientes(`id`,`username`,`email`,`password`,`nombre`,`rol`) VALUES('','Cliente','$email','$password','','2')");
+				mysqli_query($mysqli,"INSERT INTO clientes(`id`,`username`,`email`,`password`,`nombre`,`rol`,`logo_url`,`apellido`,`telefono`) VALUES('','Cliente','$email','$password','','2','img_perfil/default.png','','')");
+				
 				echo ' <script language="javascript">alert("Usuario registrado con éxito");</script> ';
 				echo "<script>location.href='../../?p=login'</script>";
 			}

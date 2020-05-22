@@ -3,7 +3,6 @@
 		$idp = clear($agregar);
 		$cant = clear($cant);
 		
-		$id_cliente = clear($_SESSION['id_cliente']);
 
 		$v = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
 
@@ -18,10 +17,8 @@
 
 	if(isset($busq)){
 		$q = $mysqli->query("SELECT * FROM productos WHERE name like '%$busq%'");
-	}elseif(isset($busq)){
-		$q = $mysqli->query("SELECT * FROM productos WHERE name like '%$busq%'");
 	}elseif(!isset($busq)){
-		$q = $mysqli->query("SELECT * FROM productos ORDER BY id DESC");
+		$q = $mysqli->query("SELECT * FROM productos ORDER BY id ASC");
 	}else{
 		$q = $mysqli->query("SELECT * FROM productos ORDER BY id DESC");
 	}
@@ -50,7 +47,6 @@ while($r=mysqli_fetch_array($q)){
 				}else{
 					$desc = "0.".$r['oferta'];
 				}
-
 				$preciototal = $r['price'] -($r['price'] * $desc);
 			}else{
 				$preciototal = $r['price'];
@@ -65,6 +61,7 @@ while($r=mysqli_fetch_array($q)){
 				<?php
 				if($r['oferta']>0){
 					?>
+					<br>
 					<del><?=$r['price']?> <?=$divisa?></del> <span class="precio"> <?=$preciototal?> <?=$divisa?> </span>
 					<?php
 				}else{
@@ -81,7 +78,6 @@ while($r=mysqli_fetch_array($q)){
 ?>
 
 <script type="text/javascript">
-	
 	function agregar_carro(idp){
 		var cant = prompt("¿Que cantidad desea agregar?",1);
 
@@ -89,5 +85,4 @@ while($r=mysqli_fetch_array($q)){
 			window.location="?p=productos&agregar="+idp+"&cant="+cant;
 		}
 	}
-
 </script>
