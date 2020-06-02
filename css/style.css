@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
+body{
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
+
 .contenedor_principal{
     width: 100%;
     overflow: hidden;
 }
+
 
 /*Aquí inician los estilos de la cabecera*/
 
@@ -114,7 +121,7 @@ nav ul li a{
 
 .submenu{
 	position: absolute;
-    background: #464444dc;
+    background: rgb(243, 241, 241);
 
 	width: 100%;
 	visibility: hidden;
@@ -278,6 +285,7 @@ footer{
     width: 100%;
     background: rgb(43, 41, 41);
     overflow: hidden;
+    align-self: flex-end;
 }
 
 footer .contenido_pie{
@@ -381,8 +389,10 @@ footer hr{
 }
 
 .perfil form div img{
+    text-align: center;
     width: 150px;
-    border-radius: 100px;
+    height: 142px;
+    border-radius: 100%;
 }
 
 .perfil .datos_imagen{
@@ -390,11 +400,17 @@ footer hr{
     float: left;
 }
 
+.perfil form .foto_perfil{
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 10px 20px 20px;
+    border: 1px solid;
+}
+
 .perfil form #load_img{
     overflow: hidden;
     width: 100%;
-    padding: 20px;
-    border: 1px solid;
+    margin-bottom: 1em;
 }
 
 .perfil form .pedido_perfil{
@@ -437,9 +453,65 @@ footer hr{
 .perfil form .formulario_perfil table tr td input{
     width: 300px;
     padding: 5px;
-    margin-top: 5px;
+    margin-top: 4px;
 }
-
-
-
 /*Aquí terminan los estilos para el perfil*/
+
+/*Aquí inician los estilos para mi vista de productos*/
+    .cont_vistaproducto{
+        width: 100%;
+        margin-top: 1em;
+        overflow: hidden;
+        
+        padding: 20px;
+    }
+    
+    .cont_vistaproducto .producto_izquierda{
+        float: left;
+        overflow: hidden;
+        width: 50%;
+        text-align: center;
+    
+    }
+
+    .cont_vistaproducto .producto_derecha{
+        float: right;
+        overflow: hidden;
+        width: 50%;
+    }
+
+    .cont_vistaproducto img{
+        width:70%;
+        height: 300px;
+    }
+
+    .cont_vistaproducto  .producto_derecha h1{
+        text-align: left;
+        font-size: 26px;
+    }
+
+    .cont_vistaproducto  .producto_derecha .opciones_compra{
+        width: 100%;
+        padding: 100px 0 0 0 ;
+        overflow: hidden;
+    }
+
+    .cont_vistaproducto  .producto_derecha .opciones_compra div{
+        display: inline-block;
+        width: 49%;
+        overflow: hidden;
+        margin-bottom: 1em;
+    }
+
+    .cont_vistaproducto .producto_derecha button{
+        width: 100%;
+        padding: 15px;
+    }
+
+    .cont_vistaproducto .producto_derecha input{
+        
+        width: 30%;
+    }
+    
+
+/*Aquí terminan los estilos para la vista del producto*/

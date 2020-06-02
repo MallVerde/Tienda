@@ -12,15 +12,15 @@ $row = mysqli_fetch_array($query_empresa);
 <div class="perfil">
     <form method="post" id="perfil">
         <div class="datos_imagen">
-            <div id="load_img">
-                <center>
+            <div class="foto_perfil" align="center">
+                <div id="load_img">
                     <img id="imagen_perfil" class="img-responsive" src="<?php echo $row['logo_url']; ?>" alt="imagen_perfil">
-                </center>
+                </div>
                 <br>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input class='filestyle' data-buttonText="Cambair foto" type="file" name="imagefile" id="imagefile" onchange="upload_image();">
+                            <input class='filestyle' data-buttonText="Buscar" type="file" name="imagefile" id="imagefile" onchange="upload_image();">
                         </div>
                     </div>
                 </div>
@@ -43,30 +43,58 @@ $row = mysqli_fetch_array($query_empresa);
                     <tr>
                         <td class='col-md-3'>
                             Nombre: <br>
-                            <input type="text" placeholder="por ej. Jose" name="nombre" value="<?php echo $row['nombre'] ?>" required>
+                            <input type="text" placeholder="por ej. Jose" name="nombre" value="<?php echo $row['nombre'] ?>" required autocomplete="off">
                         </td>
                         <td>
                             Apellido: <br>
-                            <input type="text" placeholder="por ej. Perez" name="apellido" value="<?php echo $row['apellido'] ?>" required>
+                            <input type="text" placeholder="por ej. Perez" name="apellido" value="<?php echo $row['apellido'] ?>" required required autocomplete="off">
                         </td>
                     </tr>
                     <tr>
                         <td class='col-md-3'>
                             Email de contácto: <br>
-                            <input type="text" placeholder="por ej. contacto@gmail.com" name="email" value="<?php echo $row['email'] ?>" required>
+                            <input type="text" placeholder="por ej. contacto@gmail.com" name="email" value="<?php echo $row['email'] ?>" required required autocomplete="off">
                         </td>
                         <td>
                             Télefono: <br>
-                            <input type="text" placeholder="por ej. 2741035519" name="telefono" value="<?php echo $row['telefono'] ?>" required>
+                            <input type="text" placeholder="por ej. 2741035519" name="telefono" value="<?php echo $row['telefono'] ?>" required required autocomplete="off">
                         </td>
                     </tr>
                 </table>
+                <button type="submit" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-refresh"></i> Actualizar información</button>
             </div>
         </div>
     </form>
 </div>
+<div class='col-md-14
+
+' id="resultados_ajax"></div><!-- Carga los datos ajax -->
+
 
 <script type="text/javascript" src="js/bootstrap-filestyle.js"> </script>
+
+<script>
+    $("#perfil").submit(function(event) {
+        $('.guardar_datos').attr("disabled", true);
+
+        var parametros = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/editar_perfil.php",
+            data: parametros,
+            beforeSend: function(objeto) {
+                $("#resultados_ajax").html("Mensaje: Cargando...");
+            },
+            success: function(datos) {
+                $("#resultados_ajax").html(datos);
+                $('.guardar_datos').attr("disabled", false);
+
+            }
+        });
+        event.preventDefault();
+    })
+</script>
+
 <script>
     function upload_image() {
         var inputFileImage = document.getElementById("imagefile");

@@ -14,8 +14,7 @@
     	redir("?p=agregar_producto");
     }
 ?>
-
-	
+<form method="post" action="" enctype="multipart/form-data">
 	<h1>Modificar Producto</h1>
 	<br>
 	<div class="form-group">
@@ -44,7 +43,7 @@
 		</select>
 	</div>
 
-	<form method="post" action="" enctype="multipart/form-data">
+	
 	<div class="form-group">
 		<input type="text" class="form-control" name="name" value="<?=$rq['name']?>" placeholder="Nombre del producto"/>
 	</div>

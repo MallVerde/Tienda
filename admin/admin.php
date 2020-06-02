@@ -75,7 +75,8 @@
                 ?>
             </div>
         </section>
-        <footer>
+    </div>
+    <footer>
             <div class="contenido_pie">
                 <div class="pie_left">
                     <h4>
@@ -83,7 +84,6 @@
                     </h4>
                 </div>
             </div>    
-        </footer>
-    </div>
+    </footer>
 </body>
 </html>

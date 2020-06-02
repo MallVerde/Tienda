@@ -27,6 +27,8 @@
     <script type="text/javascript" src="fontawesome/js/all.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
     <title>Anaqueles García</title>
@@ -88,7 +90,8 @@
                 ?>
             </div>
         </section>
-        <footer>
+    </div>
+    <footer>
             <div class="contenido_pie">
                 <div class="pie_left">
                     <h4>
@@ -103,24 +106,5 @@
                 </div>
             </div>    
         </footer>
-    </div>
 </body>
 </html>
-<script type="text/javascript">
-	function minimizer(){
-		var minimized = $("#minimized").val();
-
-		if(minimized == 0){
-			//mostrar
-			$(".carritot").css("bottom","350px");
-			$(".carritob").css("bottom","0px");
-			$("#minimized").val('1');
-		}else{
-			//minimizar
-
-			$(".carritot").css("bottom","0px");
-			$(".carritob").css("bottom","-350px");
-			$("#minimized").val('0');
-		}
-	}
-</script>
