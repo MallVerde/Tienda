@@ -33,6 +33,12 @@ if (isset($messages)) {
 	</div>
 <?php
 }
+
+if (isset($_POST['busq'])) {
+	$productoABuscar = $_POST['busq'];
+}else{
+	$productoABuscar="";
+}
 ?>
 
 
@@ -50,7 +56,8 @@ if (isset($messages)) {
 	function load(page) {
 		var parametros = {
 			"action": "ajax",
-			"page": page
+			"page": page,
+			"busq": "<?php echo $productoABuscar ?>"
 		};
 		$.ajax({
 			url: 'ajax/banner_ajax.php',
@@ -66,3 +73,6 @@ if (isset($messages)) {
 	}
 </script>
 
+<?php 
+$productoABuscar="";
+?>

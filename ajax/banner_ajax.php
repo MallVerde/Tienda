@@ -6,6 +6,7 @@ include("../configs/config.php");
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 
 if ($action == 'ajax') {
+
 	$tables = "productos";
 	$sWhere = " ";
 	$sWhere .= " ";
@@ -29,13 +30,26 @@ if ($action == 'ajax') {
 	$reload = '../modulos/?p=productos';
 	//main query to fetch the data
 	$query = mysqli_query($con, "SELECT * FROM  $tables  $sWhere LIMIT $offset,$per_page");
+
+	#if (isset($busq) && $busq!="") {
+	#	echo $busq;
+	#	$query = mysqli_query($con,"SELECT * FROM productos WHERE name like '%$busq%'");
+	#}
+	if (isset($_GET['busq']) || isset($_POST['busq'])) {
+		$busq = trim($_GET['busq']);
+		$query = mysqli_query($con, "SELECT * FROM productos WHERE name like '%$busq%' LIMIT $offset,$per_page");
+		if ($query->num_rows <= 0) {
+			$cadena = "No se encuentra el producto buscado...";
+		}
+	}
 ?>
+
 	<div class="buscar">
-		<form method="post" action="" class="">
+		<form method="POST" action="?p=productos" class="">
 			<div class="row">
 				<div class="col-md-11">
 					<div class="form-group">
-						<input type="text" class="form-control" name="busq" placeholder="Buscar..." autocomplete="off" />
+						<input id="busqueda" type="text" class="form-control" name="busq" placeholder="Buscar..." autocomplete="off" />
 					</div>
 				</div>
 				<div class="col-md-1">
@@ -48,7 +62,7 @@ if ($action == 'ajax') {
 	//loop through fetched data
 	if ($numrows > 0) {
 	?>
-		<div class="row" style="overflow: hidden">
+		<div class="" style="overflow: hidden">
 			<?php
 			while ($row = mysqli_fetch_array($query)) {
 				$preciototal = 0;
@@ -89,7 +103,11 @@ if ($action == 'ajax') {
 			}
 			?>
 		</div>
-
+		<?php
+		if (isset($cadena)) {
+			echo "<br>$cadena <br><br><br><br><br><br><br><br><br><br><br>";
+		}
+		?>
 		<div class="table-pagination text-right">
 			<?php echo paginate($reload, $page, $total_pages, $adjacents); ?>
 		</div>
