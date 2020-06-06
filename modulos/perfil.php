@@ -1,12 +1,12 @@
 <?php
-$id = $_SESSION['id_cliente'];
+    $id = $_SESSION['id_cliente'];
 
-if (isset($_SESSION['id_cliente'])) {
-} else {
-    header("Location:?p=principal");
-}
-$query_empresa = mysqli_query($mysqli, "SELECT * FROM clientes WHERE id =$id");
-$row = mysqli_fetch_array($query_empresa);
+    if (isset($_SESSION['id_cliente'])) {
+    } else {
+        header("Location:?p=principal");
+    }
+    $query_empresa = mysqli_query($mysqli, "SELECT * FROM clientes WHERE id =$id");
+    $row = mysqli_fetch_array($query_empresa);
 ?>
 
 <div class="perfil">
@@ -43,21 +43,21 @@ $row = mysqli_fetch_array($query_empresa);
                     <tr>
                         <td class='col-md-3'>
                             Nombre: <br>
-                            <input type="text" placeholder="por ej. Jose" name="nombre" value="<?php echo $row['nombre'] ?>" required autocomplete="off">
+                            <input type="text" placeholder="por ej. Jose" name="nombre" value="<?php echo $row['nombre'] ?>"  autocomplete="off">
                         </td>
                         <td>
                             Apellido: <br>
-                            <input type="text" placeholder="por ej. Perez" name="apellido" value="<?php echo $row['apellido'] ?>" required required autocomplete="off">
+                            <input type="text" placeholder="por ej. Perez" name="apellido" value="<?php echo $row['apellido'] ?>"   autocomplete="off">
                         </td>
                     </tr>
                     <tr>
                         <td class='col-md-3'>
                             Email de contácto: <br>
-                            <input type="text" placeholder="por ej. contacto@gmail.com" name="email" value="<?php echo $row['email'] ?>" required required autocomplete="off">
+                            <input type="text" placeholder="por ej. contacto@gmail.com" name="email" value="<?php echo $row['email'] ?>"   autocomplete="off">
                         </td>
                         <td>
                             Télefono: <br>
-                            <input type="text" placeholder="por ej. 2741035519" name="telefono" value="<?php echo $row['telefono'] ?>" required required autocomplete="off">
+                            <input type="text" placeholder="por ej. 2741035519" name="telefono" value="<?php echo $row['telefono'] ?>"   autocomplete="off">
                         </td>
                     </tr>
                 </table>
@@ -66,13 +66,8 @@ $row = mysqli_fetch_array($query_empresa);
         </div>
     </form>
 </div>
-<div class='col-md-14
-
-' id="resultados_ajax"></div><!-- Carga los datos ajax -->
-
-
+<div class='col-md-14' id="resultados_ajax"></div><!-- Carga los datos ajax -->
 <script type="text/javascript" src="js/bootstrap-filestyle.js"> </script>
-
 <script>
     $("#perfil").submit(function(event) {
         $('.guardar_datos').attr("disabled", true);
@@ -88,7 +83,6 @@ $row = mysqli_fetch_array($query_empresa);
             success: function(datos) {
                 $("#resultados_ajax").html(datos);
                 $('.guardar_datos').attr("disabled", false);
-
             }
         });
         event.preventDefault();

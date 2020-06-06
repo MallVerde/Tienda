@@ -20,7 +20,7 @@ if(isset($id) && isset($modificar)){
 
 }
 
-if(isset($finalizar)){
+if(isset($finalizar) && $monto_total != 0){
 
 	$monto = clear($monto_total);
 
@@ -67,10 +67,10 @@ if(isset($finalizar)){
 		<th>Nombre del producto</th>
 		<th>Cantidad</th>
 		<th>Precio por unidad</th>
-		<th>Oferta</th>
-		<th>Precio Total</th>
 		<th>Precio Neto</th>
-		<th>Action</th>
+		<th>Descuento</th>
+		<th>Precio Total</th>
+		<th></th>
 	</tr>
 <?php
 $id_cliente = clear($_SESSION['id_cliente']);
@@ -96,13 +96,14 @@ while($r = mysqli_fetch_array($q)){
 	$nombre_producto = $r2['name'];
 
 	$cantidad = $r['cant'];
-
 	$precio_unidad = $r2['price'];
+	
 	$precio_total = $cantidad * $preciototal;
 	$imagen_producto = $r2['imagen'];
-
 	$monto_total = $monto_total + $precio_total;
 
+	$precio_neto=$cantidad * $precio_unidad;
+	
 	
 
 	?>
@@ -111,16 +112,16 @@ while($r = mysqli_fetch_array($q)){
 			<td><?=$nombre_producto?></td>
 			<td><?=$cantidad?></td>
 			<td><?=$precio_unidad?> <?=$divisa?></td>
+			<td><?=$precio_neto?> <?=$divisa?></td>
 			<td>
 				<?php
 					if($r2['oferta']>0){
-						echo $r2['oferta']."% de Descuento";
+						echo $r2['oferta']."%";
 					}else{
 						echo "Sin descuento";
 					}
 				?>
 			</td>
-			<td><?=$preciototal?> <?=$divisa?></td>
 			<td><?=$precio_total?> <?=$divisa?></td>
 			<td>
 				<a onclick="modificar('<?=$r['id']?>')" href="#"><i class="fa fa-edit" title="Modificar cantidad en carrito"></i></a>
@@ -131,15 +132,14 @@ while($r = mysqli_fetch_array($q)){
 }
 ?>
 </table>
-<br>
-<h2>Monto Total: <b class="text-green"><?=$monto_total?> <?=$divisa?></b></h2>
-
-<br><br>
-<form method="post" action="">
+	<h2>Monto Total: <b class="text-green"><?=$monto_total?> <?=$divisa?></b></h2>
+	<br>
 	<input type="hidden" name="monto_total" value="<?=$monto_total?>"/>
+	<a href="?p=pago_envio&monto_total=<?= $monto_total ?>">
 	<button class="btn btn-primary" type="submit" name="finalizar"><i class="fa fa-check"></i> Finalizar Compra</button>
-</form>
+	</a>
 
+	
 <script type="text/javascript">
 		
 	function modificar(idc){

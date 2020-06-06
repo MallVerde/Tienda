@@ -45,11 +45,11 @@
 
 	
 	<div class="form-group">
-		<input type="text" class="form-control" name="name" value="<?=$rq['name']?>" placeholder="Nombre del producto"/>
+		<input type="text" class="form-control" name="name" value="<?=$rq['name']?>" placeholder="Nombre del producto" autocomplete="off" required/>
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" name="price" value="<?=$rq['price']?>" placeholder="Precio del producto"/>
+		<input type="text" class="form-control" name="price" value="<?=$rq['price']?>" placeholder="Precio del producto" autocomplete="off" required/>
 	</div>
 
 	<div class="form-group">

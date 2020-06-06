@@ -67,7 +67,7 @@ if ($action == 'ajax') {
 			while ($row = mysqli_fetch_array($query)) {
 				$preciototal = 0;
 				if ($row['oferta'] > 0) {
-					if (strlen($r['oferta']) == 1) {
+					if (strlen($row['oferta']) == 1) {
 						$desc = "0.0" . $row['oferta'];
 					} else {
 						$desc = "0." . $row['oferta'];

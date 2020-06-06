@@ -26,7 +26,7 @@
 <br>
 <form method="post" action="" enctype="multipart/form-data">
 	<div class="form-group">
-		<select name="oferta" class="form-control">
+		<select name="oferta" class="form-control" required>
 			<option value="0">0% de Descuento</option>
 			<option value="5">5% de Descuento</option>
 			<option value="10">10% de Descuento</option>
@@ -52,18 +52,18 @@
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" name="name" placeholder="Nombre del producto"/>
+		<input type="text" class="form-control" name="name" placeholder="Nombre del producto" autocomplete="off" required/>
 	</div>
 	
 	
 	<div class="form-group">
-		<input type="text" class="form-control" name="price" placeholder="Precio del producto"/>
+		<input type="text" class="form-control" name="price" placeholder="Precio del producto" autocomplete="off" required/>
 	</div>
 
 	<label>Imagen del producto</label>
 
 	<div class="form-group">
-		<input type="file" class="form-control" name="imagen" title="Imagen del producto" placeholder="Imagen del producto"/>
+		<input type="file" class="form-control" name="imagen" title="Imagen del producto" placeholder="Imagen del producto" required/>
 	</div>
 
 	<div class="form-group">

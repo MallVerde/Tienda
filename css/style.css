@@ -513,5 +513,156 @@ footer hr{
         width: 30%;
     }
     
-
 /*Aquí terminan los estilos para la vista del producto*/
+
+/*Aquí inican los estilos para la pestaña pago envios*/
+.alerta_covid{
+    width: 100%;
+    padding:0px 0px 10px 0px;
+    overflow: hidden;
+    background: rgb(88, 88, 90);
+    color: white;
+    text-align: center;
+}
+
+.padre_pago{
+    width: 70%;
+    padding-right: 20px;
+    overflow: hidden;
+    margin-top: 2em;
+    float: left;
+}
+
+.padre_pago h3{
+    width: 100%;
+    background:rgb(53, 51, 51);    
+    color: white;
+    padding: 10px 0px 16px 15px;
+    margin-top: 0px;
+}
+
+#caja_envio{
+    width: 100%;
+    background: #eeeeee;
+    overflow: hidden;
+    margin-top: -1em;
+    padding: 10px 0px;
+}
+
+#caja_envio table tr td input, select{
+    padding: 5px;
+    width:50%;
+}
+
+#caja_envio #formulario_envio{
+    padding: 0px 0px 10px 15px;
+    width: 90%;
+    overflow: hidden;
+    margin: auto;
+    background: white;
+    border-radius: 4px;
+}
+
+.padre_pago .boton_seguir{
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.padre_pago .boton_seguir a{
+    text-decoration: none;
+    color: black;
+}
+
+.padre_pago .boton_seguir button{
+    float: right;
+    background: orange;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 14px;
+    margin-top: 1em;
+}
+
+#caja_facturacion{
+    width: 100%;
+    background: #eeeeee;
+    overflow: hidden;
+    margin-top: -1em;
+    padding: 10px 0px;
+    display: none;
+}
+
+#caja_facturacion #formulario_facturacion{
+    width: 90%;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#caja_pago{
+    width: 100%;
+    background: #eeeeee;
+    overflow: hidden;
+    margin-top: -1em;
+    padding: 10px 0px;
+    display: none;
+}
+
+#caja_pago #tarjeta_debito{
+    width: 90%;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border-radius:4px;
+}
+
+#caja_pago #tarjeta_debito input{
+    padding: 4px;
+    margin-bottom: 5px;
+}
+
+#caja_pago #tarjeta_debito select{
+    margin-bottom: 4px;
+}
+
+
+#caja_pago #metodo_pago{
+    width: 90%;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border-radius:4px;
+    margin-bottom: 1em;
+}
+
+#caja_pago #acepto_condiciones_pago{
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    border-radius:4px;
+    margin-bottom: 5px;
+}
+
+.datos_envio_pago{
+    width: 30%;
+    float: left;
+    border: 1px solid rgb(160, 157, 157);
+    border-radius: 4px;
+    margin-top: 2em;
+    overflow: hidden;
+}
+
+.datos_envio_pago div{
+    padding: 0px 15px 10px 15px;
+}
+
+
+.datos_envio_pago h3{
+    background:rgb(214, 214, 214);
+    padding: 10px 15px;
+    margin-top: 0px;
+    color: rgb(58, 57, 57);
+}
+/*Aquí terminan los estilos para la pestaña pago envios*/
