@@ -21,9 +21,10 @@ if(isset($guardar_envio)){
     $estado = clear($estado);
     $localidad = $_POST['localidad'];
     $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
 
-    $q = $mysqli->query("INSERT INTO envios (Nombre,Apellido,Direccion,Cod_Postal,Estado, Localidad, Telefono, Metodo_Entrega) 
-    VALUES ('$nombre','$apellido','$direccion','$codigo_postal','$estado','$localidad','$telefono','Estándar')");
+    $q = $mysqli->query("INSERT INTO envios (Nombre,Apellido,Direccion,Cod_Postal,Estado, Localidad, Telefono,Email, Metodo_Entrega) 
+    VALUES ('$nombre','$apellido','$direccion','$codigo_postal','$estado','$localidad','$telefono','$email','Estándar')");
 }
 ?>
 <div class="alerta_covid">
