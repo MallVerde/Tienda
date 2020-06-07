@@ -1,6 +1,5 @@
 <?php
 	check_admin();
-
 	if(isset($enviar)){
 		$name = clear($name);
 		$price = clear($price);
@@ -67,7 +66,7 @@
 	</div>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-success" name="enviar"><i class="fa fa-check"></i> Agregar Producto</button>
+		<button type="submit" class="btn btn-succe2ss" name="enviar"><i class="fa fa-check"></i> Agregar Producto</button>
 	</div>
 </form>
 <br>

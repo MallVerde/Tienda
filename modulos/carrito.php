@@ -29,20 +29,14 @@ if(isset($finalizar) && $monto_total != 0){
 
 	$sc = $mysqli->query("SELECT * FROM compra WHERE id_cliente = '$id_cliente' ORDER BY id DESC LIMIT 1");
 	$rc = mysqli_fetch_array($sc);
-
 	$ultima_compra = $rc['id'];
-
 
 	$q2 = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente'");
 	while($r2=mysqli_fetch_array($q2)){
-
 		$sp = $mysqli->query("SELECT * FROM productos WHERE id = '".$r2['id_producto']."'");
 		$rp = mysqli_fetch_array($sp);
-
 		$monto = $rp['price'];
-
 		$mysqli->query("INSERT INTO productos_compra (id_compra,id_producto,cantidad,monto) VALUES ('$ultima_compra','".$r2['id_producto']."','".$r2['cant']."','$monto')");
-
 	}
 
 	$mysqli->query("DELETE FROM carro WHERE id_cliente = '$id_cliente'");
@@ -104,8 +98,6 @@ while($r = mysqli_fetch_array($q)){
 
 	$precio_neto=$cantidad * $precio_unidad;
 	
-	
-
 	?>
 		<tr>
 			<td><img src="productos/<?=$imagen_producto?>" class="imagen_carro"/></td>
@@ -132,25 +124,23 @@ while($r = mysqli_fetch_array($q)){
 }
 ?>
 </table>
-	<h2>Monto Total: <b class="text-green"><?=$monto_total?> <?=$divisa?></b></h2>
-	<br>
-	<input type="hidden" name="monto_total" value="<?=$monto_total?>"/>
-	<a href="?p=pago_envio&monto_total=<?= $monto_total ?>">
-	<button class="btn btn-primary" type="submit" name="finalizar"><i class="fa fa-check"></i> Finalizar Compra</button>
-	</a>
+	<?php if($monto_total !=0){
+		echo "
+		<h2>Monto Total: <b class='text-green'>$monto_total $divisa</b></h2>
+		<br>
+		<input type='hidden' name='monto_total' value='$monto_total'/>
+		<a href='?p=pago_envio&monto_total=$monto_total'>
+		<button class='btn btn-primary' type='submit' name='finalizar'><i class='fa fa-check'></i> Finalizar Compra</button>
+		</a>";
+	}
+	?>
 
-	
 <script type="text/javascript">
-		
 	function modificar(idc){
 		var new_cant = prompt("¿Cual es la nueva cantidad?");
 
 		if(new_cant>0){
-
 			window.location="?p=carrito&id="+idc+"&modificar="+new_cant;
-
 		}
-
 	}
-
-</script>
+	
