@@ -44,7 +44,7 @@ while ($r = mysqli_fetch_array($q)) {
                     <h4 style="float: right;">Cantidad</h4>
                     <br>
                     <br>
-                    <input type="number" id="cant<?=$r['id']?>" name="cant" class="cant pull-right" value="1" min="1" pattern="^[0-9]+" />
+                    <input type="number" id="cant<?=$r['id']?>" name="cant" class="cant pull-right" value="1" min="1" max="99"  pattern="^[0-9]+" />
                 </div>
                 <button class="btn btn-warning pull-right" onclick="agregar_carro('<?=$r['id']?>');"><i class="fa fa-shopping-cart"></i></button>
             </div>

@@ -10,15 +10,15 @@
 		<label><h5>¿Ya estás registrado?<a href="?p=login"> Inicia Sesión</a> </h5> </label>
 
 		<div class="form-group">
-			<input type="email" autocomplete="off" class="form-control" placeholder="Email" name="email" maxlength="55"/>
+			<input type="email" autocomplete="off" class="form-control" placeholder="Email" name="email" maxlength="55" required min="3"/>
 		</div>
 		
 		<div class="form-group">
-			<input type="password" class="form-control" placeholder="Contraseña" name="password" maxlength="55"/>
+			<input type="password" class="form-control" placeholder="Contraseña" name="password" maxlength="55" required/>
 		</div>
 
 		<div class="form-group">
-			<input type="password" class="form-control" placeholder="Confirmar Contraseña" name="cpassword" maxlength="55"/>
+			<input type="password" class="form-control" placeholder="Confirmar Contraseña" name="cpassword" maxlength="55" required/>
 		</div>
 		
 		<div class="form-group">

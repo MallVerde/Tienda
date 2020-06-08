@@ -27,7 +27,7 @@
             </div>
             <div class="pedido_perfil">
                 <ul>
-                    <li><a href="#">Mis pedidos</a></li>
+                    <li><a href="?p=mis_pedidos">Mis pedidos</a></li>
                 </ul>
             </div>
         </div>

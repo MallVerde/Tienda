@@ -6,16 +6,36 @@ if (isset($agregar) && isset($cant)) {
 	$cant = clear($cant);
 	$id_cliente = clear($_SESSION['id_cliente']);
 
-	$v = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+	$sql_desc = $mysqli->query("SELECT * FROM productos WHERE id = '$idp'");
+	$desc = mysqli_fetch_array($sql_desc);
+	$descuento = $desc['oferta'];
+	$descuento = $descuento/100 * $desc['price'];
+	$monto_desc= $desc['price'] - $descuento;
 
-	if (mysqli_num_rows($v) > 0) {
+	if (isset($desc['oferta'])) {
+		
+		$v = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+		if (mysqli_num_rows($v) > 0) {
 
-		$q = $mysqli->query("UPDATE carro SET cant = cant + $cant WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+			$q = $mysqli->query("UPDATE carro SET cant = cant + $cant, monto = $monto_desc WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+		} else {
+
+			$q = $mysqli->query("INSERT INTO carro (id_cliente,id_producto,cant,monto) VALUES ($id_cliente,$idp,$cant,'$monto_desc')");
+		}
+		$messages[] = "Su producto se ha ingresado al carrito de compras";
 	} else {
+		$monto = $desc['price'];
 
-		$q = $mysqli->query("INSERT INTO carro (id_cliente,id_producto,cant) VALUES ($id_cliente,$idp,$cant)");
+		$v = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+		if (mysqli_num_rows($v) > 0) {
+
+			$q = $mysqli->query("UPDATE carro SET cant = cant + $cant, monto = $monto WHERE id_cliente = '$id_cliente' AND id_producto = '$idp'");
+		} else {
+
+			$q = $mysqli->query("INSERT INTO carro (id_cliente,id_producto,cant,monto) VALUES ($id_cliente,$idp,$cant,'$monto')");
+		}
+		$messages[] = "Su producto se ha ingresado al carrito de compras";
 	}
-	$messages[] = "Su producto se ha ingresado al carrito de compras";
 }
 ?>
 
@@ -36,8 +56,8 @@ if (isset($messages)) {
 
 if (isset($_POST['busq'])) {
 	$productoABuscar = $_POST['busq'];
-}else{
-	$productoABuscar="";
+} else {
+	$productoABuscar = "";
 }
 ?>
 
@@ -49,7 +69,7 @@ if (isset($_POST['busq'])) {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-		$(document).ready(function() {
+	$(document).ready(function() {
 		load(1);
 	});
 
@@ -73,6 +93,6 @@ if (isset($_POST['busq'])) {
 	}
 </script>
 
-<?php 
-$productoABuscar="";
+<?php
+$productoABuscar = "";
 ?>

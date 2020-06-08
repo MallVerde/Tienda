@@ -1,94 +1,33 @@
 <?php
-	check_admin();
+check_admin();
+?>
+<br>
+<div>
+	<a href="?p=agregar_producto">
+		<button class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Agregar producto</button>
+	</a>
+</div>
 
-	if(isset($aceptar)){
-		$mysqli->query("UPDATE pagos SET estado = 1 WHERE id = '$aceptar'");
-		$id_compra = clear($id_compra);
-		$mysqli->query("UPDATE compra SET estado = 1 WHERE id = '$id_compra'");
+<h1>Pagos de los clientes</h1>
+<table class="table table-striped">
+	<tr>
+		<th>Nombre del cliente</th>
+		<th>Fecha de pago</th>
+		<th>Tipo de pago</th>
+		<th>Monto de pago</th>
+	</tr>
 
-		echo '<script language="javascript">alert("Pago verificado");</script>';
-		redir("?p=ver_compra&id=".$id_compra);
-	}
-
+	<?php
+	$s = $mysqli->query("SELECT * FROM pagos");
+	while ($r = mysqli_fetch_array($s)) {
 	?>
-	<br>
-	<div>
-		<a href="?p=agregar_producto">
-			<button class="btn btn-primary"> <i class="fa fa-plus-circle"></i> Agregar producto</button>
-		</a>
-	</div>
-
-	<h1>Pagos Pendientes</h1>
-
-	<table class="table table-striped">
 		<tr>
-			<th>Cliente</th>
-			<th>Fecha</th>
-			<th>Comprobante</th>
-			<th>Nombre de comprobante</th>
-			<th>Estado</th>
-			<th>Acciones</th>
+			<td><?=$r['dueno_tarjeta'] ?></td>
+			<td><?=$r['fecha_pago']?></td>
+			<td><?=$r['Tipo_pago']?> de <?=$r['Tipo_tarjeta']?></td>
+			<td><?=$r['Monto_pago'] ?></td>
 		</tr>
-
-		<?php
-		$s = $mysqli->query("SELECT * FROM pagos WHERE estado = 0 ORDER BY fecha DESC");
-		while($r=mysqli_fetch_array($s)){
-			?>
-			<tr>
-				<td><?=nombre_cliente($r['id_cliente'])?></td>
-				<td><?=fecha($r['fecha'])?></td>
-				<td><a style="color:#333" target="_blank" href="../comprobantes/<?=$r['comprobante']?>">Ver Comprobante <i class="fa fa-eye"></i></a></td>
-				<td><?=$r['nombre']?></td>
-				<td><?=estado_pago($r['estado'])?></td>
-				<td>
-					<?php
-					if($r['estado']==0){
-						?>
-							<a style="color:#333" href="?p=pagos&aceptar=<?=$r['id']?>&id_compra=<?=$r['id_compra']?>" title="Verificar y aceptar pago"><i class="fa fa-check"></i></a>
-						<?php
-					}
-					?>
-					<a style="color:#333" href="?p=ver_compra&id=<?=$r['id_compra']?>"><i class="fa fa-eye" title="Ver Compra"></i></a>
-				</td>
-			</tr>
-			<?php
-		}
-		?>
-	</table>
-
-	<h1>Pagos de los clientes</h1>
-	<table class="table table-striped">
-		<tr>
-			<th>Cliente</th>
-			<th>Fecha</th>
-			<th>Comprobante</th>
-			<th>Nombre de comprobante</th>
-			<th>Estado</th>
-			<th>Acciones</th>
-		</tr>
-
-		<?php
-		$s = $mysqli->query("SELECT * FROM pagos ORDER BY fecha DESC");
-		while($r=mysqli_fetch_array($s)){
-			?>
-			<tr>
-				<td><?=nombre_cliente($r['id_cliente'])?></td>
-				<td><?=fecha($r['fecha'])?></td>
-				<td><a style="color:#333" target="_blank" href="../comprobantes/<?=$r['comprobante']?>">Ver Comprobante <i class="fa fa-eye"></i></a></td>
-				<td><?=$r['nombre']?></td>
-				<td><?=estado_pago($r['estado'])?></td>
-				<td>
-					<?php
-					if($r['estado']==0){
-						?>
-							<a style="color:#333" href="?p=pagos&aceptar=<?=$r['id']?>" title="Verificar y aceptar pago"><i class="fa fa-check"></i></a>
-						<?php
-					}
-					?>
-					<a style="color:#333" href="?p=ver_compra&id=<?=$r['id_compra']?>"><i class="fa fa-eye" title="Ver Compra"></i></a>
-				</td>
-			</tr>
-			<?php
-		}
-		?>
-	</table>
+	<?php
+	}
+	?>
+</table>

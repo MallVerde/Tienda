@@ -13,30 +13,109 @@ $query_cliente = mysqli_query($mysqli, "SELECT * FROM clientes WHERE id =$id_cli
 $row = mysqli_fetch_array($query_cliente);
 
 
-if(isset($guardar_envio)){
+$query_envios = mysqli_query($mysqli, "SELECT * FROM envios ORDER BY ID_Envio DESC LIMIT 1;");
+$envios = mysqli_fetch_array($query_envios);
+$ID_Envio = $envios['ID_Envio'] + 1;
+
+
+
+$query_pagos = mysqli_query($mysqli, "SELECT * FROM pagos ORDER BY ID_Envio DESC LIMIT 1;");
+$id_pagos = mysqli_fetch_array($query_pagos);
+$ID_pago = $id_pagos['ID_pago'] + 1;
+
+
+
+if (isset($pagar)) {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $direccion = $_POST['direccion'];
     $codigo_postal = $_POST['codigo_postal'];
     $estado = clear($estado);
+    $email = $_POST['email'];
     $localidad = $_POST['localidad'];
     $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
+    $nombre_tarjeta = clear($nombre_tarjeta);
+    $tipo_tarjeta = clear($tipo_tarjeta);
+    $factura = clear($factura);
 
-    $q = $mysqli->query("INSERT INTO envios (Nombre,Apellido,Direccion,Cod_Postal,Estado, Localidad, Telefono,Email, Metodo_Entrega) 
-    VALUES ('$nombre','$apellido','$direccion','$codigo_postal','$estado','$localidad','$telefono','$email','Estándar')");
+    $fechaPago = date('Y/m/d', time());
+
+    $fechaEnvio = date('Y/m/d', time());
+    $fechaEnvio = str_replace('/', '-', $fechaEnvio);
+    $fechaEnvio = date('Y-m-d', strtotime($fechaEnvio . ' + 1 days'));
+
+    $fechaLlegada = date('Y/m/d', time());
+    $fechaLlegada = str_replace('/', '-', $fechaLlegada);
+    $fechaLlegada = date('Y-m-d', strtotime($fechaLlegada . ' + 4 days'));
+
+    if ($factura == '1') {
+        $mysqli->query("INSERT INTO facturacion (ID_pago,Fecha) 
+        VALUES ('$ID_pago',NULL)");
+
+        $mysqli->query("INSERT INTO envios (Nombre,Apellido,Direccion,Cod_Postal,Estado, Localidad, Telefono,Email,Metodo_Entrega,id_cliente) 
+        VALUES ('$nombre','$apellido','$direccion','$codigo_postal','$estado','$localidad','$telefono','$email','Estándar','$id_cliente')");
+        $Tipo_pago = 'Tarjeta';
+
+        $mysqli->query("INSERT INTO pagos (ID_Envio,dueno_tarjeta,Tipo_tarjeta,Tipo_pago, Monto_pago,fecha_pago) 
+        VALUES ('$ID_Envio','$nombre_tarjeta','$tipo_tarjeta','$Tipo_pago','$total','$fechaPago')");
+
+        $mysqli->query("INSERT INTO paqintern (ID_Envio,Fecha_envio,Fecha_llegada) 
+        VALUES ('$ID_Envio','$fechaEnvio','$fechaLlegada')");
+
+        $carro = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente'");
+
+        while ($rcarro = mysqli_fetch_array($carro)) {
+
+            $total_monto = $rcarro['monto'] * $rcarro['cant'];
+
+            $mysqli->query("INSERT INTO productos_compra (id_pago,id_producto,cantidad,monto,monto_total) VALUES ('$ID_pago','" . $rcarro['id_producto'] . "','" . $rcarro['cant'] . "','$rcarro[monto]','$total_monto')");
+        }
+
+        $mysqli->query("DELETE FROM carro WHERE id_cliente = '$id_cliente'");
+        redir("?p=carrito");
+    } else {
+        $mysqli->query("INSERT INTO envios (Nombre,Apellido,Direccion,Cod_Postal,Estado, Localidad, Telefono,Email,Metodo_Entrega,id_cliente) 
+        VALUES ('$nombre','$apellido','$direccion','$codigo_postal','$estado','$localidad','$telefono','$email','Estándar','$id_cliente')");
+        $Tipo_pago = 'Tarjeta';
+
+        $mysqli->query("INSERT INTO pagos (ID_Envio,dueno_tarjeta,Tipo_tarjeta,Tipo_pago, Monto_pago,fecha_pago) 
+        VALUES ('$ID_Envio','$nombre_tarjeta','$tipo_tarjeta','$Tipo_pago','$total','$fechaPago'");
+
+        $mysqli->query("INSERT INTO paqintern (ID_Envio,Fecha_envio,Fecha_llegada) 
+        VALUES ('$ID_Envio','$fechaEnvio','$fechaLlegada')");
+
+        $carro = $mysqli->query("SELECT * FROM carro WHERE id_cliente = '$id_cliente'");
+
+        while ($rcarro = mysqli_fetch_array($carro)) {
+
+            $total_monto = $rcarro['monto'] * $rcarro['cant'];
+
+            $mysqli->query("INSERT INTO productos_compra (id_pago,id_producto,cantidad,monto,monto_total) VALUES ('$ID_pago','" . $rcarro['id_producto'] . "','" . $rcarro['cant'] . "','$rcarro[monto]','$total_monto')");
+        }
+
+
+        $mysqli->query("DELETE FROM carro WHERE id_cliente = '$id_cliente'");
+        redir("?p=carrito");
+    }
 }
 ?>
+
+<style type="text/css">
+    #metodo_envio,
+    #triste {
+        display: none;
+    }
+</style>
 <div class="alerta_covid">
     <h3>Debido a la situación sanitaria COVID-19, la opción de Recoger en Tienda no está disponible temporalmente</h3>
 </div>
 <div class="padre_pago">
-    <div class="titulo_envio">
-        <h3>1. Envío</h3>
-    </div>
-    <div id="caja_envio">
-        <div id="formulario_envio">
-            <form method="post" >
+    <form action="" method="post">
+        <div class="titulo_envio">
+            <h3>1. Envío</h3>
+        </div>
+        <div id="caja_envio">
+            <div id="formulario_envio">
                 <table style="width: 100%;">
                     <tr>
                         <td><br> Nombre</td>
@@ -47,7 +126,6 @@ if(isset($guardar_envio)){
                         <td><br>Apellido</td>
                         <td><br><input type="text" name="apellido" autocomplete="off" required></td>
                     </tr>
-                    
                     <tr>
                         <td><br>Dirección</td>
                         <td><br><input type="text" name="direccion" autocomplete="off" required></td>
@@ -65,7 +143,7 @@ if(isset($guardar_envio)){
                         <td>
                             <br>
                             <select name="estado" required>
-                                <option value="">Selecciona una provincia</option>
+                                <option value="">Selecciona un estado</option>
                                 <option value="Aguas Calientes">Aguas Calientes</option>
                                 <option value="Baja California">Baja California</option>
                                 <option value="Baja California Sur">Baja California Sur</option>
@@ -116,89 +194,74 @@ if(isset($guardar_envio)){
                 <br>
                 Método de entrega <br><br>
                 <input type="radio" value="Venta" name="movimiento" checked> <b>Estándar </b>$<?= $costo_envio ?>
-                <br>
-                <br>
-                <button class="btn btn-submit" name="guardar_envio" type="submit">Guardar información</button>
-            </form>
+            </div>
+            <div class="boton_seguir">
+                <table style="width: 100%;">
+                    <td><a href="javascript:void(0);" onclick="ocultarEnvio();"><button>Continuar a pago</button></a></td>
+                </table>
+            </div>
         </div>
-        <?php
-            if(isset($nombre)){
-                echo "
-                <div class='boton_seguir'>
-                    <table style='width: 100%;'>
-                        <td><a href='javascript:void(0);' onclick='ocultarEnvio();'><button>Continuar a facturación</button></a></td>
-                    </table>
-                </div>";
-            }
-        ?>
-    </div>
-    <br>
-    <div class="titulo_facturacion">
-        <h3>2. Facturación</h3>
-    </div>
-    <div id="caja_facturacion">
-        <div id="formulario_facturacion">
-            <table style="width: 100%;">
-                <tr>
-                    <td><label><?=$nombre?> <?=$apellido?> <br></label></td>
-                    <td><label>Télefono de facturación: <?=$telefono?> <br></label></td>
-                </tr>
-                <tr>
-                    <td><label><?=$direccion?> <br></label></td>
-                </tr>
-                <tr>
-                    <td><label><?=$codigo_postal?>, <?=$estado?> <br></label></td>
-                </tr>
-                <tr>
-                    <td><label>México <br></label></td>
-                </tr>
-            </table>
+        <br>
+        <div class="titulo_pago">
+            <h3>2. Pago</h3>
         </div>
-        <div class="boton_seguir">
-            <table style="width: 100%;">
-                <tr>
-                    <td><a href="javascript:void(0);" onclick="ocultarFacturacion();"><button>Continuar a pago</button></a></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <br>
-    <div class="titulo_pago">
-        <h3>3. Pago</h3>
-    </div>
-    <div id="caja_pago">
-        <div id="metodo_pago">
-            <table style="width: 40%;">
-                <tr>
-                    <td><input name="modo_pago" type="radio" value="VALUE" id="" onclick="ocultarPaypal()" checked>Tarjeta de crédito o débito</td>
-                    <td><input name="modo_pago" type="radio" value="VALUE" id="" onclick="ocultarDebito();">Paypal</td>
-                </tr>
-            </table>
-        </div>
+        <div id="caja_pago">
+            <div id="metodo_pago">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <h4>Tarjeta de crédito o débito</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Factura</h4>
+                        </td>
+                        <td>
+                            <select name="factura" id="" style="width: 100%;">
+                                <option value="1">Si Realizar factura</option>
+                                <option value="0">No Realizar factura</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-        <div id="acepto_condiciones_pago">
-            <p>
-                Si haces clic en “Pagar”, confirmas que leíste, entendiste y aceptaste nuestros <a href="https://www.eshopworld.com/terms-and-conditions-of-sale-es/">Términos y condiciones de venta</a>. Comprendo que mi pedido no se puede modificar una vez realizado.
-            </p>
-        </div>
-        <div id="tarjeta_debito">
-            <input type="text" placeholder="Nombre" style="width: 100%;">
-            <select name="" id="">
-                <option value="Crédito">Crédito</option>
-                <option value="Débito">Débito</option>
-            </select>
+            <div id="acepto_condiciones_pago">
+                <p style="text-align: justify;">
+                    Si haces clic en “Pagar”, confirmas que leíste, entendiste y aceptaste nuestros <a href="https://www.eshopworld.com/terms-and-conditions-of-sale-es/">Términos y condiciones de venta</a>. Comprendo que mi pedido no se puede modificar una vez realizado.
+                </p>
+            </div>
+            <div id="tarjeta_debito">
+                <input type="text" name="nombre_tarjeta" autocomplete="off" required style="width: 100%;">
+                <select name="tipo_tarjeta" id="" required>
+                    <option value="Crédito">Crédito</option>
+                    <option value="Débito">Débito</option>
+                </select>
 
-            <input type="text" placeholder="Número de tarjeta" style="width: 100%;">
-            <table style="width: 100%;">
-                <tr>
-                    <td><input type="text" placeholder="CSC" style="width: 100%;"></td>
-                    <td><input type="text" placeholder="MM/AA" style="width: 100%;"></td>
-                </tr>
-            </table>
-            <button style="width: 100%;">Pagar $<?= $total ?></button>
+                <input type="text" placeholder="Número de tarjeta" style="width: 100%;" required autocomplete="off">
+                <table style="width: 100%;">
+                    <tr>
+                        <td><input type="text" placeholder="CSC" style="width: 100%;" required autocomplete="off"></td>
+                        <td><input type="text" placeholder="MM/AA" style="width: 100%;" required autocomplete="off"></td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-success" name="pagar" style="width: 100%;">Pagar $<?= $total ?></button>
+            </div>
+            <div class="boton_seguir">
+                <table style="width: 100%;">
+                    <tr>
+                        <td><a href="javascript:void(0);" onclick="ocultarPago();"><button style="float: left;">Regresar a envio</button></a></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
+
+
+<!--------Aquí empieza el aside-------->
+
 <div class="datos_envio_pago">
     <h3>Resumen</h3>
     <div>
@@ -223,26 +286,17 @@ if(isset($guardar_envio)){
             </tr>
         </table>
     </div>
-
 </div>
+<!----------Aquí termina el aside-------->
+
 <script type="text/javascript">
     function ocultarEnvio() {
         document.getElementById('caja_envio').style.display = 'none';
-        document.getElementById('caja_facturacion').style.display = 'block';
-    }
-    function ocultarFacturacion() {
-        document.getElementById('caja_facturacion').style.display = 'none';
         document.getElementById('caja_pago').style.display = 'block';
     }
 
-    function ocultarDebito() {
-        document.getElementById('tarjeta_debito').style.display = 'none';
-        document.getElementById('acepto_condiciones_pago').style.display = 'none';
-        document.getElementById('id1').prop('checked', false).checkboxradio("refresh");
-    }
-
-    function ocultarPaypal() {
-        document.getElementById('tarjeta_debito').style.display = 'block';
-        document.getElementById('acepto_condiciones_pago').style.display = 'block';
+    function ocultarPago() {
+        document.getElementById('caja_envio').style.display = 'block';
+        document.getElementById('caja_pago').style.display = 'none';
     }
 </script>
