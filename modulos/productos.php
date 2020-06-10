@@ -23,6 +23,7 @@ if (isset($agregar) && isset($cant)) {
 			$q = $mysqli->query("INSERT INTO carro (id_cliente,id_producto,cant,monto) VALUES ($id_cliente,$idp,$cant,'$monto_desc')");
 		}
 		$messages[] = "Su producto se ha ingresado al carrito de compras";
+		redir("?p=carrito");
 	} else {
 		$monto = $desc['price'];
 
@@ -35,6 +36,7 @@ if (isset($agregar) && isset($cant)) {
 			$q = $mysqli->query("INSERT INTO carro (id_cliente,id_producto,cant,monto) VALUES ($id_cliente,$idp,$cant,'$monto')");
 		}
 		$messages[] = "Su producto se ha ingresado al carrito de compras";
+		redir("?p=carrito");
 	}
 }
 ?>

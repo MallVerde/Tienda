@@ -132,7 +132,7 @@ if (isset($pagar)) {
                     </tr>
                     <tr>
                         <td><br>Código postal</td>
-                        <td><br><input type="text" name="codigo_postal" autocomplete="off" required></td>
+                        <td><br><input type="text" name="codigo_postal" autocomplete="off" required maxlength="5"></td>
                     </tr>
                     <tr>
                         <td><br>Localidad</td>
@@ -184,11 +184,11 @@ if (isset($pagar)) {
                     </tr>
                     <tr>
                         <td><br>Télefono de envio</td>
-                        <td><br><input type="text" name="telefono" autocomplete="off" required> </td>
+                        <td><br><input type="text" name="telefono" autocomplete="off" required maxlength="10" onkeypress="return soloNumeros(event);" id="tel"> </td>
                     </tr>
                     <tr>
                         <td><br>Correo eléctronico</td>
-                        <td><br><input type="text" name="email" autocomplete="off" required></td>
+                        <td><br><input type="email" name="email" autocomplete="off" required></td>
                     </tr>
                 </table>
                 <br>
@@ -239,11 +239,15 @@ if (isset($pagar)) {
                     <option value="Débito">Débito</option>
                 </select>
 
-                <input type="text" placeholder="Número de tarjeta" style="width: 100%;" required autocomplete="off">
+                <input type="text" placeholder="Número de tarjeta" style="width: 100%;" required autocomplete="off" maxlength="19">
                 <table style="width: 100%;">
                     <tr>
-                        <td><input type="text" placeholder="CSC" style="width: 100%;" required autocomplete="off"></td>
-                        <td><input type="text" placeholder="MM/AA" style="width: 100%;" required autocomplete="off"></td>
+                        <td>
+                            <input style="width:100%; display:inline-block" class="form-control" type="text" maxlength="2" autocomplete="off" id="mes" name="mes" required onkeypress="return soloNumeros(event);">
+                        </td>
+                        <td>
+                            <input style="width:100%; display:inline-block" class="form-control" type="text" maxlength="2" autocomplete="off" id="año" name="año" required onkeypress="return soloNumeros(event);">
+                        </td>
                     </tr>
                 </table>
                 <button type="submit" class="btn btn-success" name="pagar" style="width: 100%;">Pagar $<?= $total ?></button>
@@ -288,6 +292,7 @@ if (isset($pagar)) {
     </div>
 </div>
 <!----------Aquí termina el aside-------->
+<script src="js/solonumeros.js"></script>
 
 <script type="text/javascript">
     function ocultarEnvio() {
